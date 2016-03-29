@@ -6,16 +6,16 @@ http://forum.odroid.com/viewtopic.php?f=64&t=3831
 http://odroid.com/dokuwiki/doku.php?id=en:xu4_xen
 http://www.armhf.com/boards/odroid-xu/odroid-sd-install/
 ```
-* Preparing
-Prepare a microSD Card.
-Use minicom: `sudo minicom -c on`
-SD card device name assumption: `/dev/sdc`
-SD card mount point assumption: `~/boot, ~/rootfs`
-linux dirctory assumption: `~/linux-xen`
-xen dirctory assumption: `~/xen`
+* Preparing  
+Prepare a microSD Card.  
+Use minicom: `sudo minicom -c on`  
+SD card device name assumption: `/dev/sdc`  
+SD card mount point assumption: `~/boot, ~/rootfs`  
+linux dirctory assumption: `~/linux-xen`  
+xen dirctory assumption: `~/xen`  
 `apt-get install gcc-4.9-arm-linux-gnueabihf` 
-# (gcc version 4.9.3 (Ubuntu/Linaro 4.9.3-4ubuntu1) )
-# gcc version over 4.9 will not work.
+# (gcc version 4.9.3 (Ubuntu/Linaro 4.9.3-4ubuntu1) )  
+# gcc version over 4.9 will not work.  
 `ln -s /usr/bin/arm-linux-gnueabihf-gcc-4.9 /usr/bin/arm-linux-gnueabihf-gcc`
 
 ##ODROID-XU microSD Card Installation ##
@@ -28,7 +28,7 @@ t e
 n p 2 enter enter 
 w
 ```
-Format partition 1 as FAT by typing `mkfs.vfat /dev/sdc1`
+Format partition 1 as FAT by typing `mkfs.vfat /dev/sdc1`  
 Format partition 2 as ext4 by typing `mkfs.ext4 /dev/sdc2`
 
 * U-boot
@@ -50,7 +50,7 @@ dom0 login userid is `ubuntu` and the password is `ubuntu`.
 ```
 git clone git://xenbits.xen.org/xen.git -b staging --depth 1 xen-staging
 cd xen
-export CROSS_COMPILE=arm-linux-gnueabihf-
+export CROSS_COMPILE=arm-linux-gnueabihf-	
 make dist-xen XEN_TARGET_ARCH=arm32 debug=y CONFIG_EARLY_PRINTK=exynos5250
 mkdir ~/boot/xen
 mkimage -A arm -T kernel -a 0x80200000 -e 0x80200000 -C none -d "$~/boot/xen" xen4.5-uImage
@@ -73,7 +73,7 @@ cp ~/linux-arm/sd_fuse/boot.ini ~/boot/
 cd ~
 ```
 * Console login prompt 
-`cp ~/rootfs/etc/init/tty1.conf ~/rootfs/etc/init/hvc0.conf`
+`cp ~/rootfs/etc/init/tty1.conf ~/rootfs/etc/init/hvc0.conf`  
 motify ~/rootfs/etc/init/console.conf 
 ```
 start on stopped rc RUNLEVEL=[2345]
@@ -118,12 +118,13 @@ mkdir domU-root
 mount domU.img domU-root
 cd domU-root
 ```
-`vi ./etc/fstab`
+`vi ./etc/fstab`  
 ./etc/fstab
 ```
 /dev/xvda    /    ext4    errors=remount-ro    0    1
 ```
-`vi ./etc/init/console.conf`
+`vi ./etc/init/console.conf`  
+./etc/init/console.conf  
 ```
 start on stopped rc RUNLEVEL=[2345]
 stop on runlevel [!2345]
@@ -148,13 +149,13 @@ extra = "console=hvc0 earlyprintk debug root=/dev/xvda ro"
 disk = [ 'phy:/root/domU.img,xvda,w' ]
 vif = [ '' ]
 ```
-* Running virtual machine dom0 :
-`umount /dev/sdc1` 
-`umount /dev/sdc2` 
-eject SDcard from PC and insert SDcard to odroid-xu and then boot it.
-dom0 login userid is `ubuntu` and the password is `ubuntu`. 
+* Running virtual machine dom0 :  
+`umount /dev/sdc1`   
+`umount /dev/sdc2`   
+eject SDcard from PC and insert SDcard to odroid-xu and then boot it.  
+dom0 login userid is `ubuntu` and the password is `ubuntu`.   
 
-* Domain 0 Settings
+* Domain 0 Settings  
 xen tools:
 ```
 $ git clone  https://github.com/bkrepo/xen.git
@@ -181,10 +182,10 @@ iface xenbr0 inet dhcp
 bridge_ports eth0
 ```
 
-* Running virtual machine domU :
-`xl create -c /root/xen.cfg`
-id: 'odroid', passwd: 'odroid' 
+* Running virtual machine domU :  
+`xl create -c /root/xen.cfg`  
+id: 'odroid', passwd: 'odroid'   
 
-* There are some problem :
+* There are some problem :  
 domU doesn't have network now.
 
