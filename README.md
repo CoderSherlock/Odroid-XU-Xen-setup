@@ -13,7 +13,7 @@ SD card device name assumption: `/dev/sdc`
 SD card mount point assumption: `~/boot, ~/rootfs`  
 linux dirctory assumption: `~/linux-xen`  
 xen dirctory assumption: `~/xen`  
-`apt-get install gcc-4.9-arm-linux-gnueabihf` 
+`apt-get install gcc-4.9-arm-linux-gnueabihf`   
 # (gcc version 4.9.3 (Ubuntu/Linaro 4.9.3-4ubuntu1) )  
 # gcc version over 4.9 will not work.  
 `ln -s /usr/bin/arm-linux-gnueabihf-gcc-4.9 /usr/bin/arm-linux-gnueabihf-gcc`
@@ -32,7 +32,7 @@ Format partition 1 as FAT by typing `mkfs.vfat /dev/sdc1`
 Format partition 2 as ext4 by typing `mkfs.ext4 /dev/sdc2`
 
 * U-boot
-`git clone -b odroid-3.13.y https://github.com/suriyanr/linux-xen.git --depth=1`
+`git clone -b odroid-3.13.y https://github.com/suriyanr/linux-xen.git --depth=1`  
 `~/linux-xen/sd_fuse/sd_fusing.sh /dev/sdc`
 
 * Building a Linux Dom0 Rootfs 
@@ -139,7 +139,8 @@ cp domU.img ~/rootfs/root/
 sync
 cd ~/rootfs/root
 ```
-`vi domU.cfg`
+`vi domU.cfg`  
+domU.cfg
 ```
 kernel = "/root/Image"
 name = "guest"
