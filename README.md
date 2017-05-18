@@ -19,14 +19,14 @@ xen dirctory assumption: `~/xen`
 `ln -s /usr/bin/arm-linux-gnueabihf-gcc-4.9 /usr/bin/arm-linux-gnueabihf-gcc`
 
 ##ODROID-XU microSD Card Installation ##
-* Partition
-`fdisk /dev/sdc`
+~~* Partition~~
+~~`fdisk /dev/sdc`~~
 ```
-o p
-n p 1 enter +16M
-t e
-n p 2 enter enter 
-w
+~~o p~~
+~~n p 1 enter +16M~~
+~~t e~~
+~~n p 2 enter enter~~ 
+~~w~~
 ```
 Format partition 1 as FAT by typing `mkfs.vfat /dev/sdc1`  
 Format partition 2 as ext4 by typing `mkfs.ext4 /dev/sdc2`
